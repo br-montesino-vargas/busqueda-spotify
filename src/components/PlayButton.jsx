@@ -4,7 +4,6 @@ import {Howl, Howler} from 'howler'
 export const PlayButton = ({ preview_url }) =>
 {
     const [isPlaying, setiIsPlaying] = useState(false)
-    const [songID, setSongID] = useState(0)
 
     const sound = new Howl(
     {
@@ -18,7 +17,7 @@ export const PlayButton = ({ preview_url }) =>
         if(!isPlaying)
         {
             Howler.stop()
-            setSongID(sound.play())
+            sound.play()
         } 
         else
         {

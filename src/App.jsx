@@ -5,9 +5,10 @@ import { Card } from "./components/Card"
 
 
 const CLIENT_ID = "2a5c5608884845b7b27e87be189f3fb1"
-const REDIRECT_URI = "http://localhost:3000"
+const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const RESPONSE_TYPE = "token"
+console.log(REDIRECT_URI);
 
 const URL_AUTH_SPOTIFY = `${ AUTH_ENDPOINT }?client_id=${ CLIENT_ID }&redirect_uri=${ REDIRECT_URI }&response_type=${ RESPONSE_TYPE }`
 const URL_SEARCH_SPOTIFY = "https://api.spotify.com/v1/search"
@@ -60,7 +61,8 @@ export const App = () =>
         catch (error )
         {
 
-            if (error.status==401) {//muy probable que sea por que caduco el token
+            if (error.status === 401)
+            {
                 alert('Caducó el token, ingresa nuevamente')
                 handleLogout(); 
             }
@@ -69,6 +71,7 @@ export const App = () =>
 
     const handleLogout = () =>
     {
+        console.log(123);
         window.localStorage.removeItem("token")
         setToken("")
         setDataSearch({ items: [] })
@@ -82,7 +85,7 @@ export const App = () =>
 
                 {   token
                     &&
-                    <form onSubmit={ handleSearch } className="place-content-center">
+                    <form onSubmit={ handleSearch } className="place-content-center flex">
                         <input
                             type="text"
                             placeholder="Buscar..."
@@ -93,18 +96,21 @@ export const App = () =>
                         <button type="submit" className="shadow-md hover:shadow-xl duration-700 rounded-lg p-3 text-center">Buscar</button>
                     </form>
                 }
-                <div className="w-4/5 my-5 place-content-center grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 duration-700">
-                    
-                    {   dataSearch
-                        &&
-                        dataSearch.items.map(( item, index ) =>
-                        (
-                            <Card
-                                item={ item }
-                                key={ index }
-                            />
-                        ))
-                    }
+                <br />
+                <div className="place-content-center flex">
+                    <div className="w-4/5 my-5 place-content-center grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 duration-700">
+                        
+                        {   dataSearch
+                            &&
+                            dataSearch.items.map(( item, index ) =>
+                            (
+                                <Card
+                                    item={ item }
+                                    key={ index }
+                                />
+                            ))
+                        }
+                    </div>
                 </div>
             </>
         </div>

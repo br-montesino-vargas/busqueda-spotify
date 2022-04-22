@@ -4,26 +4,16 @@ export const NavBar = ({ token, url, handleLogout }) =>
 {
     return (
         <div>
-            <nav className="relative w-full flex flex-wrap bg- items-center justify-between py-3 bg-green-600 text-black hover:text-black focus:bg-green-700 shadow-lg">
-                <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
-                    <div className="container-fluid">
-                        <a className="text-xl text-center text-black" href="/">Busqueda en Spotify</a>
-                    </div>
-                </div>
-                <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
-                 
-                  <li className="nav-item pr-2">
+            <nav className="relative w-full flex flex-wrap bg-items-center justify-around py-3 bg-green-600 text-black hover:text-black focus:bg-green-700 shadow-lg">
+                <h1 className="text-xl text-center text-white">Busqueda en Spotify</h1>
                 {   !token
                     ?
-                    <a className='nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0' href={ url }>Ingresar a Spotify</a>
+                    <a type="button" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded' href={ url }>Ingresar a Spotify</a>
                     :
-                    <p className='nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0' onClick={ handleLogout }>Cerrar sesión</p>
+                    <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded' onClick={ handleLogout }>Cerrar sesión</button>
                 }
-                   
-                  </li>
-                 
-              </ul>
             </nav>
+            <br/>
             <br/>
         </div>
     )
